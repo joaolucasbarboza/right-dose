@@ -1,4 +1,4 @@
-package com.fema.tcc.usecases;
+package com.fema.tcc.gateways.impl;
 
 import com.fema.tcc.gateways.postgresql.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticateUserUseCase implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
   @Autowired private UserRepository userRepository;
 
