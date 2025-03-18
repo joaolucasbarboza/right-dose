@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: right-dose
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/right-dose
+    username: joaobarboza
+    password: joao.barboza@pwd
+
+  jpa:
+    hibernate.ddl-auto: update # create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:my-secret-key}}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+    enabled: true
