@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class RegisterRequestJson {
 
+  @NotNull private String name;
   @NotNull private String email;
   @NotNull private String password;
   private UserRole role;

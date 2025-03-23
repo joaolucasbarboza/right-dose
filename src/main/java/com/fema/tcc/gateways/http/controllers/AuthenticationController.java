@@ -1,66 +1,60 @@
 package com.fema.tcc.gateways.http.controllers;
 
-import com.fema.tcc.config.security.TokenService;
 import com.fema.tcc.gateways.http.json.LoginRequestJson;
 import com.fema.tcc.gateways.http.json.LoginResponseJson;
 import com.fema.tcc.gateways.http.json.RegisterRequestJson;
-import com.fema.tcc.gateways.postgresql.entity.UserEntity;
-import com.fema.tcc.gateways.postgresql.repository.UserRepository;
+import com.fema.tcc.gateways.http.json.RegisterResponseJson;
+import com.fema.tcc.gateways.http.mappers.AuthJsonMapper;
+import com.fema.tcc.usecases.Auth.AuthUseCase;
+import com.fema.tcc.usecases.Auth.RegisterUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping(
+    value = "auth",
+    consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationController {
 
-  private final AuthenticationManager authenticationManager;
-  private final UserRepository userRepository;
-  private final TokenService tokenService;
+  private final AuthUseCase authUseCase;
+  private final AuthJsonMapper authJsonMapper;
+  private final RegisterUseCase registerUseCase;
 
   @Autowired
   public AuthenticationController(
-      AuthenticationManager authenticationManager,
-      UserRepository userRepository,
-      TokenService tokenService) {
-    this.authenticationManager = authenticationManager;
-    this.userRepository = userRepository;
-    this.tokenService = tokenService;
+      AuthUseCase authUseCase, AuthJsonMapper authJsonMapper, RegisterUseCase registerUseCase) {
+    this.authUseCase = authUseCase;
+    this.authJsonMapper = authJsonMapper;
+    this.registerUseCase = registerUseCase;
   }
 
-  @PostMapping("/login")
-  public ResponseEntity login(@RequestBody @Valid LoginRequestJson loginRequestJson) {
-    var usernamePassword =
-        new UsernamePasswordAuthenticationToken(
-            loginRequestJson.email(), loginRequestJson.password());
+  @PostMapping(value = "/login")
+  public ResponseEntity<LoginResponseJson> login(
+      @RequestBody @Valid LoginRequestJson loginRequestJson) {
 
-    var authentication = this.authenticationManager.authenticate(usernamePassword);
+    LoginResponseJson loginResponseJson =
+        authJsonMapper.toLoginResponseJson(
+            authUseCase.execute(authJsonMapper.loginRequestToDomain(loginRequestJson)));
 
-    String token = tokenService.generateToken((UserEntity) authentication.getPrincipal());
-
-    return ResponseEntity.ok(new LoginResponseJson(token));
+    return ResponseEntity.ok().body(loginResponseJson);
   }
 
-  @PostMapping("/register")
-  public ResponseEntity register(@RequestBody @Valid RegisterRequestJson registerRequestJson) {
-    if (this.userRepository.findByEmail(registerRequestJson.getEmail()) != null) {
-      return ResponseEntity.badRequest().build();
-    }
+  @PostMapping(value = "/register")
+  public ResponseEntity<RegisterResponseJson> register(
+      @RequestBody @Valid RegisterRequestJson registerRequestJson) {
 
-    String encryptedPassword =
-        new BCryptPasswordEncoder().encode(registerRequestJson.getPassword());
-    UserEntity userEntity =
-        new UserEntity(
-            registerRequestJson.getEmail(), encryptedPassword, registerRequestJson.getRole());
+    RegisterResponseJson registerResponseJson =
+        authJsonMapper.domainToRegisterResponse(
+            registerUseCase.execute(authJsonMapper.registerRequestToDomain(registerRequestJson)));
 
-    this.userRepository.save(userEntity);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.status(HttpStatus.CREATED).body(registerResponseJson);
   }
 }

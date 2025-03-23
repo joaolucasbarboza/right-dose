@@ -45,7 +45,8 @@ public class UserEntity implements UserDetails {
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
-  public UserEntity(String email, String password, UserRole role) {
+  public UserEntity(String name, String email, String password, UserRole role) {
+    this.name = name;
     this.email = email;
     this.password = password;
     this.role = role;
