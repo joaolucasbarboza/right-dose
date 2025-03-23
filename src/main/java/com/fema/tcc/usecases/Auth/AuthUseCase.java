@@ -1,4 +1,4 @@
-package com.fema.tcc.usecases;
+package com.fema.tcc.usecases.Auth;
 
 import com.fema.tcc.config.security.TokenService;
 import com.fema.tcc.domains.user.User;

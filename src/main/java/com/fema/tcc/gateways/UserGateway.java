@@ -1,3 +1,10 @@
 package com.fema.tcc.gateways;
 
-public interface UserGateway {}
+import com.fema.tcc.domains.user.User;
+
+public interface UserGateway {
+
+  User save(User user);
+
+  boolean existsByEmail(String email);
+}

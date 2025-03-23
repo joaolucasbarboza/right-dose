@@ -1,6 +1,6 @@
 CREATE TABLE "prescription" (
     prescription_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES "user"(user_id),
+    user_id INT REFERENCES "users"(user_id),
     medicine_id INT REFERENCES "medicine"(medicine_id),
     dosage VARCHAR(50), -- Dosagem (ex: 1 comprimido, 5 mL)
     frequency VARCHAR(50), -- Frequência (ex: "A cada 8 horas")
