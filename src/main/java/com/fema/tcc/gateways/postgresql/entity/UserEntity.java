@@ -45,11 +45,21 @@ public class UserEntity implements UserDetails {
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
-  public UserEntity(String name, String email, String password, UserRole role) {
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<MedicineEntity> medicines;
+
+  public UserEntity(
+      Integer userId, String name, String email, String password, Date createdAt, UserRole role) {
+    this.userId = userId;
     this.name = name;
     this.email = email;
     this.password = password;
+    this.createdAt = createdAt;
     this.role = role;
+  }
+
+  public UserEntity(Integer userId) {
+    this.userId = userId;
   }
 
   @Override

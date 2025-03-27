@@ -1,6 +1,7 @@
 DROP TABLE "medicine";
 CREATE TABLE "medicine" (
-    medicine_id INT PRIMARY KEY,
+    medicine_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(user_id),
     name VARCHAR(100) NOT NULL,
     description TEXT,
     quantity INT NOT NULL,

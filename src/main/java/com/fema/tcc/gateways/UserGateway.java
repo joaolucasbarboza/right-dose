@@ -4,6 +4,8 @@ import com.fema.tcc.domains.user.User;
 
 public interface UserGateway {
 
+  User findById(Integer userId);
+
   User save(User user);
 
   boolean existsByEmail(String email);
