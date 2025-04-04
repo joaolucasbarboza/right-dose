@@ -16,14 +16,24 @@ public class Medicine {
   private String description;
   private int quantity;
   private MedicineUnit unit;
+  private DosagePerUnit dosagePerUnit;
   private Date createdAt;
+  private Date updatedAt;
   private User user;
 
-  public Medicine(String name, String description, int quantity, MedicineUnit unit) {
+  public Medicine(
+      String name,
+      String description,
+      int quantity,
+      MedicineUnit unit,
+      DosagePerUnit dosagePerUnit) {
     this.name = name;
     this.description = description;
     this.quantity = quantity;
     this.unit = unit;
+    this.dosagePerUnit = dosagePerUnit;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 
   public Medicine(
@@ -32,12 +42,18 @@ public class Medicine {
       String description,
       int quantity,
       MedicineUnit unit,
-      Date createdAt) {
+      DosagePerUnit dosagePerUnit,
+      User user,
+      Date createdAt,
+      Date updatedAt) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.quantity = quantity;
     this.unit = unit;
+    this.dosagePerUnit = dosagePerUnit;
+    this.user = user;
     this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 }

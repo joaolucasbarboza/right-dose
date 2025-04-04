@@ -2,32 +2,43 @@ package com.fema.tcc.gateways.http.mappers;
 
 import com.fema.tcc.domains.medicine.Medicine;
 import com.fema.tcc.domains.user.User;
-import com.fema.tcc.gateways.http.json.MedicineRequest;
+import com.fema.tcc.gateways.http.json.MedicineRequestJson;
 import com.fema.tcc.gateways.http.json.MedicineResponseJson;
 import com.fema.tcc.gateways.postgresql.entity.MedicineEntity;
 import com.fema.tcc.gateways.postgresql.entity.UserEntity;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class MedicineJsonMapper {
 
-  public Medicine requestToDomain(MedicineRequest medicineRequest) {
+  private final UserJsonMapper userJsonMapper;
+
+  public Medicine requestToDomain(MedicineRequestJson medicineRequestJson) {
     return new Medicine(
-        medicineRequest.name(),
-        medicineRequest.description(),
-        medicineRequest.quantity(),
-        medicineRequest.unit());
+        medicineRequestJson.name(),
+        medicineRequestJson.description(),
+        medicineRequestJson.quantity(),
+        medicineRequestJson.unit(),
+        medicineRequestJson.dosagePerUnit());
   }
 
-  public MedicineEntity domainToEntity(User user, Medicine medicine) {
+  public MedicineEntity domainToEntity(Medicine medicine) {
+    UserEntity userEntity = userJsonMapper.domainToEntity(medicine.getUser());
+
     return new MedicineEntity(
+        medicine.getId(),
         medicine.getName(),
         medicine.getDescription(),
         medicine.getQuantity(),
         medicine.getUnit(),
-        new UserEntity(user.getUserId()));
+        medicine.getDosagePerUnit(),
+        medicine.getCreatedAt(),
+        medicine.getUpdatedAt(),
+        userEntity);
   }
 
   public MedicineResponseJson domainToResponse(Medicine medicine) {
@@ -37,7 +48,9 @@ public class MedicineJsonMapper {
         medicine.getDescription(),
         medicine.getQuantity(),
         medicine.getUnit(),
-        medicine.getCreatedAt());
+        medicine.getDosagePerUnit(),
+        medicine.getCreatedAt(),
+        medicine.getUpdatedAt());
   }
 
   public List<MedicineResponseJson> domainListToResponseList(List<Medicine> medicineList) {
@@ -45,13 +58,17 @@ public class MedicineJsonMapper {
   }
 
   public Medicine entityToDomain(MedicineEntity entity) {
+    User user = userJsonMapper.entityToDomain(entity.getUser());
+
     return new Medicine(
         entity.getMedicineId(),
         entity.getName(),
         entity.getDescription(),
         entity.getQuantity(),
         entity.getUnit(),
+        entity.getDosagePerUnit(),
+        user,
         entity.getCreatedAt(),
-        entity.getUser() != null ? new User(entity.getUser().getUserId()) : null);
+        entity.getUpdatedAt());
   }
 }
