@@ -1,10 +1,27 @@
 package com.fema.tcc.gateways.http.controllers;
 
-import com.fema.tcc.gateways.postgresql.repository.UserRepository;
+import com.fema.tcc.gateways.http.json.UserResponseJson;
+import com.fema.tcc.gateways.http.mappers.UserJsonMapper;
+import com.fema.tcc.usecases.User.UserUseCase;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController(value = "/user")
+@RestController
+@RequestMapping(value = "user")
+@AllArgsConstructor
 public class UserController {
 
-  public UserController(UserRepository userRepository) {}
+  private final UserUseCase userUseCase;
+  private final UserJsonMapper userJsonMapper;
+
+  @GetMapping
+  public ResponseEntity<UserResponseJson> getById() {
+
+    UserResponseJson response = userJsonMapper.domainToResponse(userUseCase.getUser());
+
+    return ResponseEntity.ok().body(response);
+  }
 }

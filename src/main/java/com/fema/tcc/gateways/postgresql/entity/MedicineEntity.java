@@ -1,28 +1,52 @@
-// package com.fema.tcc.gateways.postgresql.entity;
-//
-// import jakarta.persistence.Column;
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.Table;
-// import jakarta.validation.constraints.NotNull;
-// import java.time.LocalDateTime;
-//
-// @Entity
-// @Table(name = "medicine")
-// public class MedicineEntity {
-//
-//  @Id
-//  @Column(name = "medicine_id")
-//  private int medicineId;
-//
-//  @NotNull private String name;
-//
-//  private String description;
-//
-//  @NotNull private Integer quantity;
-//
-//  @NotNull private String unit;
-//
-//  @Column(name = "created_at")
-//  private LocalDateTime createdAt;
-// }
+package com.fema.tcc.gateways.postgresql.entity;
+
+import com.fema.tcc.domains.enums.MedicineUnit;
+import com.fema.tcc.domains.medicine.DosagePerUnit;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "medicine")
+@Table(name = "medicine")
+public class MedicineEntity {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "medicine_id")
+  private Integer medicineId;
+
+  @NotNull private String name;
+
+  private String description;
+
+  @NotNull private int quantity;
+
+  @NotNull
+  @Enumerated(EnumType.STRING)
+  private MedicineUnit unit;
+
+  @Embedded private DosagePerUnit dosagePerUnit;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_at", updatable = false)
+  private Date createdAt = new Date();
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "updated_at")
+  @UpdateTimestamp
+  private Date updatedAt;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  @NotNull
+  private UserEntity user;
+}
