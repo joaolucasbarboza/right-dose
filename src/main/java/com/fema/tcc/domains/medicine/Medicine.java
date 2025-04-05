@@ -2,14 +2,16 @@ package com.fema.tcc.domains.medicine;
 
 import com.fema.tcc.domains.enums.MedicineUnit;
 import com.fema.tcc.domains.user.User;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Medicine {
   private Integer id;
   private String name;
@@ -17,8 +19,8 @@ public class Medicine {
   private int quantity;
   private MedicineUnit unit;
   private DosagePerUnit dosagePerUnit;
-  private Date createdAt;
-  private Date updatedAt;
+  private LocalDateTime createdAt;
+  private LocalDateTime updatedAt;
   private User user;
 
   public Medicine(
@@ -32,8 +34,8 @@ public class Medicine {
     this.quantity = quantity;
     this.unit = unit;
     this.dosagePerUnit = dosagePerUnit;
-    this.createdAt = new Date();
-    this.updatedAt = new Date();
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
   }
 
   public Medicine(
@@ -44,8 +46,8 @@ public class Medicine {
       MedicineUnit unit,
       DosagePerUnit dosagePerUnit,
       User user,
-      Date createdAt,
-      Date updatedAt) {
+      LocalDateTime createdAt,
+      LocalDateTime updatedAt) {
     this.id = id;
     this.name = name;
     this.description = description;

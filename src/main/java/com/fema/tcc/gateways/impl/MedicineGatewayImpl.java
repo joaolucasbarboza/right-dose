@@ -48,7 +48,7 @@ public class MedicineGatewayImpl implements MedicineGateway {
   }
 
   @Override
-  public Optional<Medicine> findMedicineById(Integer medicineId) {
+  public Optional<Medicine> findById(Integer medicineId) {
     return medicineRepository.findById(medicineId).map(medicineJsonMapper::entityToDomain);
   }
 }

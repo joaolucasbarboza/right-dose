@@ -4,7 +4,7 @@ import com.fema.tcc.domains.enums.MedicineUnit;
 import com.fema.tcc.domains.medicine.DosagePerUnit;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,12 +38,12 @@ public class MedicineEntity {
 
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "created_at", updatable = false)
-  private Date createdAt = new Date();
+  private LocalDateTime createdAt = LocalDateTime.now();
 
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "updated_at")
   @UpdateTimestamp
-  private Date updatedAt;
+  private LocalDateTime updatedAt;
 
   @ManyToOne
   @JoinColumn(name = "user_id")

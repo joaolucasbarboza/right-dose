@@ -1,4 +1,4 @@
-package com.fema.tcc.gateways.http.json;
+package com.fema.tcc.gateways.http.jsons;
 
 import com.fema.tcc.domains.enums.UserRole;
 import jakarta.validation.constraints.NotNull;
@@ -10,5 +10,5 @@ public class RegisterRequestJson {
   @NotNull private String name;
   @NotNull private String email;
   @NotNull private String password;
-  private UserRole role;
+  @NotNull private UserRole role;
 }

@@ -1,4 +1,4 @@
-package com.fema.tcc.usecases.Auth;
+package com.fema.tcc.usecases.auth;
 
 import com.fema.tcc.domains.user.User;
 import com.fema.tcc.gateways.UserGateway;

@@ -1,12 +1,12 @@
 package com.fema.tcc.gateways.http.controllers;
 
-import com.fema.tcc.gateways.http.json.LoginRequestJson;
-import com.fema.tcc.gateways.http.json.LoginResponseJson;
-import com.fema.tcc.gateways.http.json.RegisterRequestJson;
-import com.fema.tcc.gateways.http.json.RegisterResponseJson;
+import com.fema.tcc.gateways.http.jsons.LoginRequestJson;
+import com.fema.tcc.gateways.http.jsons.LoginResponseJson;
+import com.fema.tcc.gateways.http.jsons.RegisterRequestJson;
+import com.fema.tcc.gateways.http.jsons.RegisterResponseJson;
 import com.fema.tcc.gateways.http.mappers.AuthJsonMapper;
-import com.fema.tcc.usecases.Auth.AuthUseCase;
-import com.fema.tcc.usecases.Auth.RegisterUseCase;
+import com.fema.tcc.usecases.auth.AuthUseCase;
+import com.fema.tcc.usecases.auth.RegisterUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
