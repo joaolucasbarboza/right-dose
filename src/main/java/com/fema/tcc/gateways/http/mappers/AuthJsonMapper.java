@@ -1,10 +1,10 @@
 package com.fema.tcc.gateways.http.mappers;
 
 import com.fema.tcc.domains.user.User;
-import com.fema.tcc.gateways.http.json.LoginRequestJson;
-import com.fema.tcc.gateways.http.json.LoginResponseJson;
-import com.fema.tcc.gateways.http.json.RegisterRequestJson;
-import com.fema.tcc.gateways.http.json.RegisterResponseJson;
+import com.fema.tcc.gateways.http.jsons.LoginRequestJson;
+import com.fema.tcc.gateways.http.jsons.LoginResponseJson;
+import com.fema.tcc.gateways.http.jsons.RegisterRequestJson;
+import com.fema.tcc.gateways.http.jsons.RegisterResponseJson;
 import java.util.ArrayList;
 import org.springframework.stereotype.Component;
 

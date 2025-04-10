@@ -1,10 +1,10 @@
 package com.fema.tcc.gateways.http.controllers;
 
 import com.fema.tcc.domains.medicine.Medicine;
-import com.fema.tcc.gateways.http.json.MedicineRequestJson;
-import com.fema.tcc.gateways.http.json.MedicineResponseJson;
+import com.fema.tcc.gateways.http.jsons.MedicineRequestJson;
+import com.fema.tcc.gateways.http.jsons.MedicineResponseJson;
 import com.fema.tcc.gateways.http.mappers.MedicineJsonMapper;
-import com.fema.tcc.usecases.Medicine.MedicineUseCase;
+import com.fema.tcc.usecases.medicine.MedicineUseCase;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

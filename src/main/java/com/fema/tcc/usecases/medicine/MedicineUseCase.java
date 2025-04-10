@@ -1,10 +1,10 @@
-package com.fema.tcc.usecases.Medicine;
+package com.fema.tcc.usecases.medicine;
 
 import com.fema.tcc.domains.medicine.Medicine;
 import com.fema.tcc.domains.user.User;
 import com.fema.tcc.gateways.MedicineGateway;
-import com.fema.tcc.gateways.exceptions.NotFoundException;
-import com.fema.tcc.usecases.User.UserUseCase;
+import com.fema.tcc.gateways.http.exceptions.NotFoundException;
+import com.fema.tcc.usecases.user.UserUseCase;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class MedicineUseCase {
 
   public Medicine getMedicineById(Integer id) {
     return medicineGateway
-        .findMedicineById(id)
+        .findById(id)
         .orElseThrow(() -> new NotFoundException("Medicine not found"));
   }
 
@@ -39,7 +39,7 @@ public class MedicineUseCase {
 
     Medicine medicine =
         medicineGateway
-            .findMedicineById(medicineUpdate.getId())
+            .findById(medicineUpdate.getId())
             .orElseThrow(() -> new NotFoundException("Medicine not found"));
 
     if (!medicine.getUser().getUserId().equals(user.getUserId())) {
@@ -56,7 +56,7 @@ public class MedicineUseCase {
 
   public void deleteMedicine(Integer id) {
     medicineGateway
-        .findMedicineById(id)
+        .findById(id)
         .ifPresentOrElse(
             medicine -> {
               if (!medicine.getUser().getUserId().equals(userUseCase.getUser().getUserId())) {

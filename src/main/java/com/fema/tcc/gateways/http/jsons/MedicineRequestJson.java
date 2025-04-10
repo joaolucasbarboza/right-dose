@@ -1,4 +1,4 @@
-package com.fema.tcc.gateways.http.json;
+package com.fema.tcc.gateways.http.jsons;
 
 import com.fema.tcc.domains.enums.MedicineUnit;
 import com.fema.tcc.domains.medicine.DosagePerUnit;

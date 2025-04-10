@@ -1,8 +1,8 @@
 package com.fema.tcc.gateways.http.controllers;
 
-import com.fema.tcc.gateways.http.json.UserResponseJson;
+import com.fema.tcc.gateways.http.jsons.UserResponseJson;
 import com.fema.tcc.gateways.http.mappers.UserJsonMapper;
-import com.fema.tcc.usecases.User.UserUseCase;
+import com.fema.tcc.usecases.user.UserUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

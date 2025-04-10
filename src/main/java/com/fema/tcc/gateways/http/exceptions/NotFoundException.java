@@ -1,4 +1,4 @@
-package com.fema.tcc.gateways.exceptions;
+package com.fema.tcc.gateways.http.exceptions;
 
 public class NotFoundException extends RuntimeException {
   public NotFoundException(String message) {

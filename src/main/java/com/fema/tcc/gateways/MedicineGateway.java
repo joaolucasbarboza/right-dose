@@ -13,5 +13,5 @@ public interface MedicineGateway {
 
   List<Medicine> findMedicinesByUserId(User user);
 
-  Optional<Medicine> findMedicineById(Integer medicineId);
+  Optional<Medicine> findById(Integer medicineId);
 }

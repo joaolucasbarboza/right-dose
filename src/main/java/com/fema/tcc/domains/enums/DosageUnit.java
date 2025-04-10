@@ -5,5 +5,6 @@ public enum DosageUnit {
   MILLIGRAM,
   GRAM,
   MILLILITER,
-  UNIT
+  UNIT,
+  TABLET
 }

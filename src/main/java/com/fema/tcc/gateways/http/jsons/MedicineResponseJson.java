@@ -1,9 +1,9 @@
-package com.fema.tcc.gateways.http.json;
+package com.fema.tcc.gateways.http.jsons;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fema.tcc.domains.enums.MedicineUnit;
 import com.fema.tcc.domains.medicine.DosagePerUnit;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public record MedicineResponseJson(
     Integer id,
@@ -12,5 +12,5 @@ public record MedicineResponseJson(
     int quantity,
     MedicineUnit unit,
     DosagePerUnit dosagePerUnit,
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC") Date createdAt,
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC") Date updatedAt) {}
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC") LocalDateTime createdAt,
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC") LocalDateTime updatedAt) {}
