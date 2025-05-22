@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public enum Status {
   PENDING("pending"),
-  SEND("send"),
   CONFIRMED("confirmed");
 
   private final String value;

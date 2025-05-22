@@ -5,7 +5,6 @@ import com.fema.tcc.domains.enums.Frequency;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,11 +55,15 @@ public class PrescriptionEntity {
 
   @Column(name = "start_date")
   @NotNull
-  private Date startDate;
+  private LocalDateTime startDate;
 
   @Column(name = "end_date")
   @NotNull
-  private Date endDate;
+  private LocalDateTime endDate;
+
+  @Column(name = "wants_notifications")
+  @NotNull
+  private boolean wantsNotifications;
 
   private String instructions;
 

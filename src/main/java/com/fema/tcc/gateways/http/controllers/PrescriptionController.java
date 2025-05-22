@@ -4,7 +4,9 @@ import com.fema.tcc.domains.prescription.Prescription;
 import com.fema.tcc.gateways.http.jsons.PrescriptionRequestJson;
 import com.fema.tcc.gateways.http.jsons.PrescriptionResponseJson;
 import com.fema.tcc.gateways.http.mappers.PrescriptionJsonMapper;
+import com.fema.tcc.usecases.prescription.CreatePrescriptionUseCase;
 import com.fema.tcc.usecases.prescription.PrescriptionUseCase;
+import com.fema.tcc.usecases.prescription.UpdatePrescriptionUseCase;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -18,20 +20,22 @@ import org.springframework.web.bind.annotation.*;
 public class PrescriptionController {
 
   private final PrescriptionUseCase prescriptionUseCase;
+  private final CreatePrescriptionUseCase createUseCase;
+  private final UpdatePrescriptionUseCase updateUseCase;
   private final PrescriptionJsonMapper prescriptionJsonMapper;
 
-  @PostMapping
+  @PostMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<PrescriptionResponseJson> create(
       @RequestBody PrescriptionRequestJson requestJson) {
 
     Prescription prescription =
-        prescriptionUseCase.create(prescriptionJsonMapper.requestToDomain(requestJson));
+        createUseCase.execute(prescriptionJsonMapper.requestToDomain(requestJson));
     PrescriptionResponseJson responseJson = prescriptionJsonMapper.domainToResponse(prescription);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(responseJson);
   }
 
-  @GetMapping
+  @GetMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<List<PrescriptionResponseJson>> findAll() {
 
     List<Prescription> prescriptions = prescriptionUseCase.getAll();
@@ -41,7 +45,7 @@ public class PrescriptionController {
     return ResponseEntity.status(HttpStatus.OK).body(responseJson);
   }
 
-  @GetMapping("/{id}")
+  @GetMapping(value = "/{id}", produces = "application/json;charset=UTF-8")
   public ResponseEntity<PrescriptionResponseJson> findById(@PathVariable Long id) {
 
     Prescription prescription = prescriptionUseCase.getById(id);
@@ -50,12 +54,12 @@ public class PrescriptionController {
     return ResponseEntity.status(HttpStatus.OK).body(responseJson);
   }
 
-  @PutMapping
+  @PutMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<PrescriptionResponseJson> update(
       @RequestParam Long id, @RequestBody @Valid PrescriptionRequestJson requestJson) {
 
     Prescription prescription =
-        prescriptionUseCase.update(id, prescriptionJsonMapper.requestToDomain(requestJson));
+        updateUseCase.execute(id, prescriptionJsonMapper.requestToDomain(requestJson));
     PrescriptionResponseJson responseJson = prescriptionJsonMapper.domainToResponse(prescription);
 
     return ResponseEntity.status(HttpStatus.OK).body(responseJson);

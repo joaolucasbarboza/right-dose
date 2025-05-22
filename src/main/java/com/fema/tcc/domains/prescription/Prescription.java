@@ -5,8 +5,11 @@ import com.fema.tcc.domains.enums.Frequency;
 import com.fema.tcc.domains.medicine.Medicine;
 import com.fema.tcc.domains.user.User;
 import java.time.LocalDateTime;
-import java.util.Date;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @AllArgsConstructor
@@ -23,8 +26,9 @@ public class Prescription {
   private int frequency;
   private Frequency uomFrequency;
   private int totalDays;
-  private Date startDate;
-  private Date endDate;
+  private LocalDateTime startDate;
+  private LocalDateTime endDate;
+  private boolean wantsNotifications;
   private String instructions;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
