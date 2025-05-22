@@ -26,7 +26,7 @@ public class MedicineController {
     this.medicineJsonMapper = medicineJsonMapper;
   }
 
-  @PostMapping
+  @PostMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<MedicineResponseJson> create(
       @RequestBody @Valid MedicineRequestJson medicineRequestJson) {
 
@@ -37,7 +37,7 @@ public class MedicineController {
     return ResponseEntity.status(HttpStatus.CREATED).body(responseJson);
   }
 
-  @GetMapping
+  @GetMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<List<MedicineResponseJson>> getMedicines() {
 
     List<MedicineResponseJson> medicineResponseList =
@@ -46,7 +46,7 @@ public class MedicineController {
     return ResponseEntity.status(HttpStatus.OK).body(medicineResponseList);
   }
 
-  @GetMapping("/{medicineId}")
+  @GetMapping(value = "/{medicineId}", produces = "application/json;charset=UTF-8")
   public ResponseEntity<MedicineResponseJson> getMedicineById(@PathVariable Integer medicineId) {
 
     Medicine medicine = medicineUseCase.getMedicineById(medicineId);
@@ -55,7 +55,7 @@ public class MedicineController {
     return ResponseEntity.status(HttpStatus.OK).body(responseJson);
   }
 
-  @PutMapping("/{medicineId}")
+  @PutMapping(value = "/{medicineId}", produces = "application/json;charset=UTF-8")
   public ResponseEntity<MedicineResponseJson> update(
       @PathVariable Integer medicineId,
       @RequestBody @Valid MedicineRequestJson medicineRequestJson) {
