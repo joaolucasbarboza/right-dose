@@ -7,10 +7,10 @@ CREATE TABLE "prescription" (
     dosage_unit VARCHAR(20) NOT NULL, -- Unidade da dosagem (ex: comprimido | ml)
     frequency INT, -- Frequência (ex: "A cada 8 | 1")
     uom_frequency VARCHAR(10) NOT NULL, -- UOM Frequency (ex: "Horas | Dias")
-    dosage_time TIME,
     total_days INT NOT NULL,
     start_date DATE,
     end_date DATE,
+    wants_notifications BOOLEAN,
     instructions TEXT,
     created_at TIMESTAMP,
     updated_at TIMESTAMP

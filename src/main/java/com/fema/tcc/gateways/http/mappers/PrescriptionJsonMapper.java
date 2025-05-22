@@ -34,6 +34,7 @@ public class PrescriptionJsonMapper {
         prescription.getTotalDays(),
         prescription.getStartDate(),
         prescription.getEndDate(),
+        prescription.isWantsNotifications(),
         prescription.getInstructions(),
         prescription.getCreatedAt(),
         prescription.getUpdatedAt());
@@ -54,6 +55,7 @@ public class PrescriptionJsonMapper {
         prescriptionEntity.getTotalDays(),
         prescriptionEntity.getStartDate(),
         prescriptionEntity.getEndDate(),
+        prescriptionEntity.isWantsNotifications(),
         prescriptionEntity.getInstructions(),
         prescriptionEntity.getCreatedAt(),
         prescriptionEntity.getUpdatedAt());
@@ -70,10 +72,11 @@ public class PrescriptionJsonMapper {
         request.dosageAmount(),
         request.dosageUnit(),
         request.frequency(),
-        request.uomfrequency(),
+        request.uomFrequency(),
         request.totalDays(),
         request.startDate(),
-        request.endDate(),
+        null,
+        request.wantsNotifications(),
         request.instructions(),
         null,
         null);
@@ -93,6 +96,7 @@ public class PrescriptionJsonMapper {
         prescription.getTotalDays(),
         prescription.getStartDate(),
         prescription.getEndDate(),
+        prescription.isWantsNotifications(),
         prescription.getInstructions(),
         prescription.getCreatedAt(),
         prescription.getUpdatedAt());
