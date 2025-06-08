@@ -7,6 +7,7 @@ import com.fema.tcc.gateways.http.mappers.PrescriptionJsonMapper;
 import com.fema.tcc.usecases.prescription.CreatePrescriptionUseCase;
 import com.fema.tcc.usecases.prescription.PrescriptionUseCase;
 import com.fema.tcc.usecases.prescription.UpdatePrescriptionUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,10 @@ public class PrescriptionController {
   private final UpdatePrescriptionUseCase updateUseCase;
   private final PrescriptionJsonMapper prescriptionJsonMapper;
 
+  @Operation(
+          summary = "Criar uma prescrição.",
+          description = "Criar uma prescrição com base em um medicamento já cadastrado."
+  )
   @PostMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<PrescriptionResponseJson> create(
       @RequestBody PrescriptionRequestJson requestJson) {
@@ -35,6 +40,10 @@ public class PrescriptionController {
     return ResponseEntity.status(HttpStatus.CREATED).body(responseJson);
   }
 
+  @Operation(
+          summary = "Buscar todas as prescrições.",
+          description = "Buscar todas a prescrições criadas por usuário."
+  )
   @GetMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<List<PrescriptionResponseJson>> findAll() {
 
@@ -45,6 +54,10 @@ public class PrescriptionController {
     return ResponseEntity.status(HttpStatus.OK).body(responseJson);
   }
 
+  @Operation(
+          summary = "Buscar uma prescrição especifica.",
+          description = "Buscar uma prescrição especifica por usuário. "
+  )
   @GetMapping(value = "/{id}", produces = "application/json;charset=UTF-8")
   public ResponseEntity<PrescriptionResponseJson> findById(@PathVariable Long id) {
 
@@ -54,6 +67,10 @@ public class PrescriptionController {
     return ResponseEntity.status(HttpStatus.OK).body(responseJson);
   }
 
+  @Operation(
+          summary = "Editar prescrição.",
+          description = "Editar uma prescrição especifica do usuário."
+  )
   @PutMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<PrescriptionResponseJson> update(
       @RequestParam Long id, @RequestBody @Valid PrescriptionRequestJson requestJson) {
@@ -65,6 +82,10 @@ public class PrescriptionController {
     return ResponseEntity.status(HttpStatus.OK).body(responseJson);
   }
 
+  @Operation(
+          summary = "Deletar prescrição.",
+          description = "Excluir uma prescrição especifica."
+  )
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Long id) {
 
