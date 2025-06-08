@@ -3,9 +3,9 @@ spring:
     name: right-dose
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/right-dose
-    username: joaobarboza
-    password: joao.barboza@pwd
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
   jpa:
     hibernate.ddl-auto: update # create-drop
@@ -17,7 +17,7 @@ spring:
 api:
   security:
     token:
-      secret: ${JWT_SECRET:my-secret-key}
+      secret: my-secret
 
 springdoc:
   swagger-ui:
