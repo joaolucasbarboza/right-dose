@@ -5,6 +5,7 @@ import com.fema.tcc.gateways.http.jsons.PrescriptionRequestJson;
 import com.fema.tcc.gateways.http.jsons.PrescriptionResponseJson;
 import com.fema.tcc.gateways.http.mappers.PrescriptionJsonMapper;
 import com.fema.tcc.usecases.prescription.CreatePrescriptionUseCase;
+import com.fema.tcc.usecases.prescription.GetAllPrescriptionUseCase;
 import com.fema.tcc.usecases.prescription.PrescriptionUseCase;
 import com.fema.tcc.usecases.prescription.UpdatePrescriptionUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class PrescriptionController {
 
   private final PrescriptionUseCase prescriptionUseCase;
+  private final GetAllPrescriptionUseCase getAllPrescriptionUseCase;
   private final CreatePrescriptionUseCase createUseCase;
   private final UpdatePrescriptionUseCase updateUseCase;
   private final PrescriptionJsonMapper prescriptionJsonMapper;
@@ -47,7 +49,8 @@ public class PrescriptionController {
   @GetMapping(produces = "application/json;charset=UTF-8")
   public ResponseEntity<List<PrescriptionResponseJson>> findAll() {
 
-    List<Prescription> prescriptions = prescriptionUseCase.getAll();
+    List<Prescription> prescriptions = getAllPrescriptionUseCase.execute();
+
     List<PrescriptionResponseJson> responseJson =
         prescriptions.stream().map(prescriptionJsonMapper::domainToResponse).toList();
 

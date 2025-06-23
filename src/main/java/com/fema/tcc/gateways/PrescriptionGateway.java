@@ -8,7 +8,7 @@ public interface PrescriptionGateway {
 
   Prescription save(Prescription prescription);
 
-  List<Prescription> findAll();
+  List<Prescription> findAllByUserId(Integer userId);
 
   Optional<Prescription> findById(Long id);
 
