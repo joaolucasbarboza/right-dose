@@ -1,10 +1,8 @@
 package com.fema.tcc.usecases.prescription;
 
 import com.fema.tcc.domains.prescription.Prescription;
-import com.fema.tcc.domains.user.User;
 import com.fema.tcc.gateways.PrescriptionGateway;
 import com.fema.tcc.gateways.http.exceptions.NotFoundException;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
