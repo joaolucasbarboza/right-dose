@@ -27,8 +27,8 @@ public class PrescriptionGatewayImpl implements PrescriptionGateway {
   }
 
   @Override
-  public List<Prescription> findAll() {
-    List<PrescriptionEntity> prescriptionEntities = prescriptionRepository.findAll();
+  public List<Prescription> findAllByUserId(Integer userId) {
+    List<PrescriptionEntity> prescriptionEntities = prescriptionRepository.findAllByUser_UserId(userId);
     return prescriptionEntities.stream().map(prescriptionJsonMapper::entityToDomain).toList();
   }
 

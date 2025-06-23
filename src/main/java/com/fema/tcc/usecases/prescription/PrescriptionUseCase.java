@@ -1,6 +1,7 @@
 package com.fema.tcc.usecases.prescription;
 
 import com.fema.tcc.domains.prescription.Prescription;
+import com.fema.tcc.domains.user.User;
 import com.fema.tcc.gateways.PrescriptionGateway;
 import com.fema.tcc.gateways.http.exceptions.NotFoundException;
 import java.util.List;
@@ -12,10 +13,6 @@ import org.springframework.stereotype.Service;
 public class PrescriptionUseCase {
 
   private final PrescriptionGateway prescriptionGateway;
-
-  public List<Prescription> getAll() {
-    return prescriptionGateway.findAll();
-  }
 
   public Prescription getById(Long id) {
 
